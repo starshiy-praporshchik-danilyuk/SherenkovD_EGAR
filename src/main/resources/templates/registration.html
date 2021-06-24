@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>В первый раз?</h1>
+    <form name="vague-registration" method="post" action="/registration">
+        <p>Имя</p>
+        <input type="text" name="name" pattern="^[а-яА-ЯёЁ]{6,20}$" title="3-20 символов кириллицы" required />
+
+        <p>Фамилия</p>
+        <input type="text" name="surname" pattern="^[а-яА-ЯёЁ]{6,20}$" title="3-20 символов кириллицы" required/>
+
+        <p>Пароль</p>
+        <input type="password" name="password" pattern="^[a-zA-Z0-9_.-]{6,20}$" title="3-20 символов без кириллица" required />
+
+        <button type="submit" class="btn-block">
+            Зарегистрироваться
+        </button>
+    </form>
+    </div>
+</body>
+</html>

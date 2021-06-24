@@ -1,0 +1,154 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: SherenkovD
+      changes:
+        - createTable:
+            tableName: Users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+
+
+        - createTable:
+            tableName: Lessons
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: theme
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: les_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: finish
+                  type: tinyint(1)
+
+        - createTable:
+            tableName: Questions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: lesson
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phrasing
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: Questions
+                  baseColumnNames: lesson
+                  referencedTableName: Lessons
+                  referencedColumnNames: id
+                  constraintName: questions_lessons_fk
+
+
+        - createTable:
+            tableName: Answers
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: question
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ans_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phrasing
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: Answers
+                  baseColumnNames: question
+                  referencedTableName: Questions
+                  referencedColumnNames: id
+                  constraintName: answers_questions_fk
+              - addForeignKeyConstraint:
+                  baseTableName: Answers
+                  baseColumnNames: user
+                  referencedTableName: Users
+                  referencedColumnNames: id
+                  constraintName: answers_users_fk
+
+
+        - createTable:
+            tableName: Role
+            columns:
+              - column:
+                  name: user
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: Role
+                  baseColumnNames: user
+                  referencedTableName: Users
+                  referencedColumnNames: id
+                  constraintName: role_users_fk
