@@ -1,4 +1,4 @@
-package com.example.SherenkvD.models;
+package com.example.sherenkovd.models;
 
 
 import lombok.Data;
@@ -13,8 +13,7 @@ import java.util.Set;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String login;
 
     @Column(length = 20)
     private String name;
@@ -33,8 +32,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(long id, String name, String surname, String password) {
-        this.id = id;
+    public User(String login, String name, String surname, String password) {
+        this.login = login;
         this.name = name;
         this.surname = surname;
         this.password = password;

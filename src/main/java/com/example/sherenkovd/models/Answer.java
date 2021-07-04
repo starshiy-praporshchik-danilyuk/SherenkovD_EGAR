@@ -1,4 +1,4 @@
-package com.example.SherenkvD.models;
+package com.example.sherenkovd.models;
 
 import lombok.Data;
 
@@ -31,8 +31,7 @@ public class Answer implements Serializable {
     public Answer() {
     }
 
-    public Answer(Long id, Question question, User user, Date ansDate, String phrasing) {
-        this.id = id;
+    public Answer(Question question, User user, Date ansDate, String phrasing) {
         this.question = question;
         this.user = user;
         this.ansDate = ansDate;

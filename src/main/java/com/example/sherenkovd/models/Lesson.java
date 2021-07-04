@@ -1,4 +1,4 @@
-package com.example.SherenkvD.models;
+package com.example.sherenkovd.models;
 
 import lombok.Data;
 
@@ -29,8 +29,7 @@ public class Lesson implements Serializable {
     public Lesson() {
     }
 
-    public Lesson(Long id, String theme, Date lesDate, String file, boolean finish) {
-        this.id = id;
+    public Lesson(String theme, Date lesDate, String file, boolean finish) {
         this.theme = theme;
         this.lesDate = lesDate;
         this.file = file;

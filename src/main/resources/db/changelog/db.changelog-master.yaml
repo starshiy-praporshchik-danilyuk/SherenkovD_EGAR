@@ -8,9 +8,8 @@ databaseChangeLog:
             tableName: Users
             columns:
               - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  name: login
+                  type: varchar(20)
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -105,7 +104,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: user
-                  type: BIGINT
+                  type: varchar(20)
                   constraints:
                     nullable: false
               - column:
@@ -128,7 +127,7 @@ databaseChangeLog:
                   baseTableName: Answers
                   baseColumnNames: user
                   referencedTableName: Users
-                  referencedColumnNames: id
+                  referencedColumnNames: login
                   constraintName: answers_users_fk
 
 
@@ -137,7 +136,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: user
-                  type: BIGINT
+                  type: varchar(20)
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -150,5 +149,5 @@ databaseChangeLog:
                   baseTableName: Role
                   baseColumnNames: user
                   referencedTableName: Users
-                  referencedColumnNames: id
+                  referencedColumnNames: login
                   constraintName: role_users_fk

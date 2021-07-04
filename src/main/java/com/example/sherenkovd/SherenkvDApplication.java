@@ -1,4 +1,4 @@
-package com.example.SherenkvD;
+package com.example.sherenkovd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

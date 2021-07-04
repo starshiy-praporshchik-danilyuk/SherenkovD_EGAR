@@ -1,4 +1,4 @@
-package com.example.SherenkvD;
+package com.example.sherenkovd;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

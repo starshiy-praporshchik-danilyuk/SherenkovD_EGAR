@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Вход</title>
+    <style>
+        .button-login {
+            background-color: #6ea9b5;
+            font-family : Arial, serif;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px;
+            cursor: pointer;
+            height: 50px;
+            width: 250px;
+        }
+        .input-info {
+            font-size: 16px;
+            margin: 4px;
+            color: #6ea9b5;
+            border-radius: 10px;
+            padding: 10px 32px;
+            border-color: #6ea9b5;
+            height: 25px;
+            width: 182px;
+            font-family : Arial, serif;
+        }
+        .text {
+            font-size: 16px;
+            margin: 4px;
+            font-family : Arial, serif;
+            color: #6ea9b5;
+        }
+        .text-header {
+            font-size: 30px;
+            margin: 10px;
+            font-family : Arial, serif;
+            color: #6ea9b5;
+        }
+    </style>
+    <!--<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />-->
 </head>
 <body>
     <div>
-        <div>
-            <h1>Авторизация</h1>
-            <form name="authorization">
-                <p>Имя</p>
-                <input type="text" id="name" required />
-                <p>Фамилия</p>
-                <input type="text" id="surname" required />
-                <p>Пароль</p>
-                <input type="password" id="password" required /><br>
-                <button type="submit" onclick="login()">Войти</button>
+        <div align="center">
+            <h1 class="text-header">Авторизация</h1>
+            <form name="authorization" method="post" action="/login">
+                <p class="text">Логин</p>
+                <input type="text" class = "input-info" name="username" pattern="^[a-zA-Z0-9]{3,20}$" title="3-20 символов кириллицы" required />
+                <p class="text">Пароль</p>
+                <input type="password"  class = "input-info" name="password" pattern="^[a-zA-Z0-9_.-]{3,20}$" title="3-20 символов без кириллица" required /><br>
+                <button type="submit" class = "button-login">Войти</button>
             </form>
-            <h1><a href="/registration" id="registration">В первый раз?</a></h1>
+            <form method="get" action="/registration">
+                <button type="submit" class = "button-login">Зарегистрироваться</button>
+            </form>
         </div>
     </div>
 
-    <script>
+    <!--<script>
         function login(){
             var name = document.getElementById("name").value;
             var surname = document.getElementById("surname").value;
@@ -31,7 +73,7 @@
             xhttp.setRequestHeader("Content-Type", "application/json");
             xhttp.send(JSON.stringify({id: 0, name: name, surname: surname, password: password, role: null}));
         }
-    </script>
+    </script>-->
 
 </body>
 </html>
