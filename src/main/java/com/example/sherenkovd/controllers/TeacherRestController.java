@@ -4,8 +4,6 @@ import com.example.sherenkovd.dto.AnswerDto;
 import com.example.sherenkovd.dto.LessonDto;
 import com.example.sherenkovd.dto.QuestionDto;
 import com.example.sherenkovd.dto.UserDto;
-import com.example.sherenkovd.models.Lesson;
-import com.example.sherenkovd.models.Question;
 import com.example.sherenkovd.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,7 @@ public class TeacherRestController {
     }
 
     @PostMapping("/teacher/addLecture")
-    public Lesson addLecture(@RequestBody LessonDto lessonDto) {
+    public LessonDto addLecture(@RequestBody LessonDto lessonDto) {
         return teacherService.addLecture(lessonDto);
     }
 
@@ -39,7 +37,7 @@ public class TeacherRestController {
     }
 
     @PostMapping("/teacher/addQuestion")
-    public Question addQuestion(@RequestBody QuestionDto questionDto){
+    public QuestionDto addQuestion(@RequestBody QuestionDto questionDto){
         return teacherService.addQuestion(questionDto);
     }
 

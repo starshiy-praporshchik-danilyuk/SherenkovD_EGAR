@@ -3,7 +3,6 @@ package com.example.sherenkovd.controllers;
 import com.example.sherenkovd.dto.AnswerDto;
 import com.example.sherenkovd.dto.LessonDto;
 import com.example.sherenkovd.dto.QuestionDto;
-import com.example.sherenkovd.models.Answer;
 import com.example.sherenkovd.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class StudentRestController {
     }
 
     @PostMapping("/student/test")
-    public Answer saveAnswer(@RequestBody AnswerDto answerDto){
+    public AnswerDto saveAnswer(@RequestBody AnswerDto answerDto){
         return studentService.saveAnswer(answerDto);
     }
 
