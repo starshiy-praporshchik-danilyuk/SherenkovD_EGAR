@@ -12,12 +12,6 @@ public class LessonDto {
     private Date lesDate;
     private String file;
 
-    public LessonDto(String theme, Date lesDate, String file) {
-        this.theme = theme;
-        this.lesDate = lesDate;
-        this.file = file;
-    }
-
     public LessonDto(long id, String theme, Date lesDate, String file) {
         this.id = id;
         this.theme = theme;

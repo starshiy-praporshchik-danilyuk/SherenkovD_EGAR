@@ -1,68 +1,46 @@
 package com.example.sherenkovd.service;
 
-import com.example.sherenkovd.converters.AnswerConverter;
-import com.example.sherenkovd.converters.LessonConverter;
-import com.example.sherenkovd.converters.QuestionConverter;
 import com.example.sherenkovd.dto.AnswerDto;
 import com.example.sherenkovd.dto.LessonDto;
 import com.example.sherenkovd.dto.QuestionDto;
-import com.example.sherenkovd.models.Answer;
-import com.example.sherenkovd.models.Lesson;
-import com.example.sherenkovd.models.Question;
-import com.example.sherenkovd.repositories.AnswerRepo;
-import com.example.sherenkovd.repositories.LessonRepo;
-import com.example.sherenkovd.repositories.QuestionRepo;
+import com.example.sherenkovd.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentService {
 
     @Autowired
-    private LessonRepo lessonRepo;
+    private LessonService lessonService;
 
     @Autowired
-    private AnswerRepo answerRepo;
+    private AnswerService answerService;
 
     @Autowired
-    private QuestionRepo questionRepo;
+    private QuestionService questionService;
 
     @Autowired
-    private AnswerConverter answerConverter;
+    private UserService userService;
 
-    @Autowired
-    private LessonConverter lessonConverter;
-
-    @Autowired
-    private QuestionConverter questionConverter;
-
-    public List<LessonDto> getLecturesForStudent(){
-        List<Lesson> lessons = lessonRepo.findLessonsByFinishEquals(true);
-        List<LessonDto> lessonsDto = new ArrayList<>();
-        for (Lesson lesson : lessons)
-            lessonsDto.add(lessonConverter.fromLessonToLessonDto(lesson));
-        return lessonsDto;
+    public List<LessonDto> getLessonsForStudent(){
+        return lessonService.getFinishedLessons();
     }
 
     public AnswerDto saveAnswer(AnswerDto answerDto){
-        Answer answer = answerRepo.save(answerConverter.fromAnswerDtoToAnswer(answerDto));
-        return answerConverter.fromAnswerToAnswerDto(answer);
+        return answerService.saveAnswer(answerDto);
     }
 
     public List<QuestionDto> getQuestions(long id){
-        var lesson = lessonRepo.getById(id);
-        List<Question> questions = questionRepo.findQuestionsByLessonEquals(lesson);
-        List<QuestionDto> questionsDto = new ArrayList<>();
-        for (Question question : questions)
-            questionsDto.add(questionConverter.fromQuestionToQuestionDto(question));
-        return questionsDto;
+        return questionService.getQuestions(id);
     }
 
     public LessonDto getLesson(long id){
-        var lesson = lessonRepo.getById(id);
-        return lessonConverter.fromLessonToLessonDto(lesson);
+        return lessonService.getLesson(id);
+    }
+
+    public UserDto getStudent(String login){
+        return userService.getStudent(login);
     }
 }

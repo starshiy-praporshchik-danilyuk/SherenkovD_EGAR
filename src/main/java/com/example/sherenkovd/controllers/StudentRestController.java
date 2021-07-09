@@ -3,6 +3,7 @@ package com.example.sherenkovd.controllers;
 import com.example.sherenkovd.dto.AnswerDto;
 import com.example.sherenkovd.dto.LessonDto;
 import com.example.sherenkovd.dto.QuestionDto;
+import com.example.sherenkovd.dto.UserDto;
 import com.example.sherenkovd.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,28 +11,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/student")
 public class StudentRestController {
 
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/student/lecture/{id}")
+    @GetMapping("/lessons/{id}")
     public LessonDto getLesson(@PathVariable("id") long id){
         return studentService.getLesson(id);
     }
 
-    @GetMapping("/student/test/{id}")
+    @GetMapping("/questions/{id}")
     public List<QuestionDto> getQuestions(@PathVariable("id") long id){
         return studentService.getQuestions(id);
     }
 
-    @PostMapping("/student/test")
+    @PostMapping("/answers")
     public AnswerDto saveAnswer(@RequestBody AnswerDto answerDto){
         return studentService.saveAnswer(answerDto);
     }
 
-    @GetMapping("/student/lectures")
+    @GetMapping("/lessons")
     public List<LessonDto> getLecturesForStudent(){
-        return studentService.getLecturesForStudent();
+        return studentService.getLessonsForStudent();
+    }
+
+    @GetMapping("/{login}")
+    public UserDto getStudent(@PathVariable("login") String login){
+        return studentService.getStudent(login);
     }
 }
