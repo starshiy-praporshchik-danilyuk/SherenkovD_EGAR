@@ -7,13 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LessonConverter {
 
-    public Lesson fromLessonDtoToLesson(LessonDto lessonDto){
-        return new Lesson(lessonDto.getTheme(),
-                lessonDto.getLesDate(),
-                lessonDto.getFile(),
-                false);
-    }
-
     public LessonDto fromLessonToLessonDto(Lesson lesson){
         return new LessonDto(lesson.getId(),
                 lesson.getTheme(),

@@ -17,24 +17,24 @@ public class TeacherRestController {
     @Autowired
     private TeacherService teacherService;
 
-    @GetMapping("/questions/{id}")
-    public List<QuestionDto> getQuestions(@PathVariable("id") long id) {
-        return teacherService.getQuestions(id);
+    @GetMapping("/questions/{id_lesson}")
+    public List<QuestionDto> getQuestions(@PathVariable("id_lesson") long lessonId) {
+        return teacherService.getQuestions(lessonId);
     }
 
-    @GetMapping("/lessons/{id}")
-    public LessonDto getLesson(@PathVariable("id") long id) {
-        return teacherService.getLesson(id);
+    @GetMapping("/lessons/{id_lesson}")
+    public LessonDto getLesson(@PathVariable("id_lesson") long lessonId) {
+        return teacherService.getLesson(lessonId);
     }
 
-    @PostMapping("/lessons")
-    public LessonDto addLesson(@RequestBody LessonDto lessonDto) {
-        return teacherService.addLecture(lessonDto);
+    @PostMapping("/{login}/lessons")
+    public LessonDto addLesson(@PathVariable("login") String login, @RequestBody LessonDto lessonDto) {
+        return teacherService.addLesson(login, lessonDto);
     }
 
-    @GetMapping("/lessons")
-    public List<LessonDto> getLecturesForTeacher() {
-        return teacherService.getLecturesForTeacher();
+    @GetMapping("/{login}/lessons")
+    public List<LessonDto> getLessonsForTeacher(@PathVariable("login") String login) {
+        return teacherService.getLessonsForTeacher(login);
     }
 
     @PostMapping("/questions")
@@ -47,8 +47,8 @@ public class TeacherRestController {
         return teacherService.getStudents();
     }
 
-    @GetMapping("/answers/{id_user}/{id_lesson}")
-    public List<AnswerDto> getAnswers(@PathVariable("id_user") long idUser, @PathVariable("id_lesson") long idLesson){
-        return teacherService.getAnswers(idUser, idLesson);
+    @GetMapping("/answers/{login}/{id_lesson}")
+    public List<AnswerDto> getAnswers(@PathVariable("login") String login, @PathVariable("id_lesson") long lessonId){
+        return teacherService.getAnswers(login, lessonId);
     }
 }

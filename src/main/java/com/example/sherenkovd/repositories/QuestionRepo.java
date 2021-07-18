@@ -9,4 +9,5 @@ import java.util.List;
 public interface QuestionRepo extends JpaRepository <Question, Long> {
 
     List<Question> findQuestionsByLessonEquals(Lesson lesson);
+
 }

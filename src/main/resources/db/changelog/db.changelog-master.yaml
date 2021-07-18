@@ -41,6 +41,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: teacher
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
                   name: theme
                   type: varchar(100)
                   constraints:
@@ -58,6 +63,12 @@ databaseChangeLog:
               - column:
                   name: finish
                   type: tinyint(1)
+              - addForeignKeyConstraint:
+                  baseTableName: Lessons
+                  baseColumnNames: teacher
+                  referencedTableName: Users
+                  referencedColumnNames: id
+                  constraintName: lessons_users_fk
 
         - createTable:
             tableName: Questions

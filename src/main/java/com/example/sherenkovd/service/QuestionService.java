@@ -2,8 +2,8 @@ package com.example.sherenkovd.service;
 
 import com.example.sherenkovd.converters.QuestionConverter;
 import com.example.sherenkovd.dto.QuestionDto;
+import com.example.sherenkovd.models.Lesson;
 import com.example.sherenkovd.models.Question;
-import com.example.sherenkovd.repositories.LessonRepo;
 import com.example.sherenkovd.repositories.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,16 +15,12 @@ import java.util.List;
 public class QuestionService {
 
     @Autowired
-    private LessonRepo lessonRepo;
-
-    @Autowired
     private QuestionRepo questionRepo;
 
     @Autowired
     private QuestionConverter questionConverter;
 
-    public List<QuestionDto> getQuestions(long id){
-        var lesson = lessonRepo.getById(id);
+    public List<QuestionDto> getQuestions(Lesson lesson){
         List<Question> questions = questionRepo.findQuestionsByLessonEquals(lesson);
         List<QuestionDto> questionsDto = new ArrayList<>();
         for (Question question : questions)
@@ -32,9 +28,12 @@ public class QuestionService {
         return questionsDto;
     }
 
-    public QuestionDto addQuestion(QuestionDto questionDto){
-        var question = questionRepo.save(new Question(lessonRepo.getById(questionDto.getLesson()),
-                questionDto.getPhrasing()));
+    public QuestionDto addQuestion(QuestionDto questionDto, Lesson lesson){
+        var question = questionRepo.save(new Question(lesson, questionDto.getPhrasing()));
         return questionConverter.fromQuestionToQuestionDto(question);
+    }
+
+    public Question getQuestion(long id){
+        return questionRepo.getById(id);
     }
 }

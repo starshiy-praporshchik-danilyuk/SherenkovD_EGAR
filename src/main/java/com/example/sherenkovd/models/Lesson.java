@@ -15,6 +15,10 @@ public class Lesson implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "teacher")
+    private User teacher;
+
     @Column(length = 100)
     private String theme;
 
@@ -29,7 +33,8 @@ public class Lesson implements Serializable {
     public Lesson() {
     }
 
-    public Lesson(String theme, Date lesDate, String file, boolean finish) {
+    public Lesson(User teacher, String theme, Date lesDate, String file, boolean finish) {
+        this.teacher = teacher;
         this.theme = theme;
         this.lesDate = lesDate;
         this.file = file;

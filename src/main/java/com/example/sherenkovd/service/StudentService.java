@@ -28,19 +28,22 @@ public class StudentService {
         return lessonService.getFinishedLessons();
     }
 
-    public AnswerDto saveAnswer(AnswerDto answerDto){
-        return answerService.saveAnswer(answerDto);
+    public AnswerDto saveAnswer(String login, AnswerDto answerDto){
+        var student = userService.getUser(login);
+        var question = questionService.getQuestion(answerDto.getQuestion());
+        return answerService.saveAnswer(answerDto, student, question);
     }
 
-    public List<QuestionDto> getQuestions(long id){
-        return questionService.getQuestions(id);
+    public List<QuestionDto> getQuestions(long lessonId){
+        var lesson = lessonService.getLesson(lessonId);
+        return questionService.getQuestions(lesson);
     }
 
-    public LessonDto getLesson(long id){
-        return lessonService.getLesson(id);
+    public LessonDto getLesson(long lessonId){
+        return lessonService.getLessonDto(lessonId);
     }
 
     public UserDto getStudent(String login){
-        return userService.getStudent(login);
+        return userService.getUserDto(login);
     }
 }

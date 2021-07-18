@@ -28,8 +28,12 @@ public class UserService {
         return usersDto;
     }
 
-    public UserDto getStudent(String login){
+    public UserDto getUserDto(String login){
         var user = userRepo.findByLogin(login);
         return userConverter.fromUserToUserDto(user);
+    }
+
+    public User getUser(String login){
+        return userRepo.findByLogin(login);
     }
 }

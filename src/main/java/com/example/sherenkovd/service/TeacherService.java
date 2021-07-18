@@ -24,31 +24,35 @@ public class TeacherService {
     @Autowired
     private AnswerService answerService;
 
-    public List<LessonDto> getLecturesForTeacher(){
-        return lessonService.getLessons();
+    public List<LessonDto> getLessonsForTeacher(String login){
+        var teacher = userService.getUser(login);
+        return lessonService.getLessonsForTeacher(teacher);
     }
 
     public LessonDto getLesson(long id){
-        return lessonService.getLesson(id);
+        return lessonService.getLessonDto(id);
     }
 
-    public LessonDto addLecture(LessonDto lessonDto){
-        return lessonService.addLesson(lessonDto);
+    public LessonDto addLesson(String login, LessonDto lessonDto){
+        var teacher = userService.getUser(login);
+        return lessonService.addLesson(teacher, lessonDto);
     }
 
-    public List<QuestionDto> getQuestions(long id){
-        return questionService.getQuestions(id);
+    public List<QuestionDto> getQuestions(long lessonId){
+        var lesson = lessonService.getLesson(lessonId);
+        return questionService.getQuestions(lesson);
     }
 
     public QuestionDto addQuestion(QuestionDto questionDto){
-        return questionService.addQuestion(questionDto);
+        var lesson = lessonService.getLesson(questionDto.getLesson());
+        return questionService.addQuestion(questionDto, lesson);
     }
 
     public List<UserDto> getStudents(){
         return userService.getStudents();
     }
 
-    public List<AnswerDto> getAnswers(long idUser, long idLesson){
-        return answerService.getAnswers(idUser, idLesson);
+    public List<AnswerDto> getAnswers(String login, long idLesson){
+        return answerService.getAnswers(login, idLesson);
     }
 }

@@ -17,19 +17,19 @@ public class StudentRestController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/lessons/{id}")
-    public LessonDto getLesson(@PathVariable("id") long id){
-        return studentService.getLesson(id);
+    @GetMapping("/lessons/{id_lesson}")
+    public LessonDto getLesson(@PathVariable("id_lesson") long lessonId){
+        return studentService.getLesson(lessonId);
     }
 
-    @GetMapping("/questions/{id}")
-    public List<QuestionDto> getQuestions(@PathVariable("id") long id){
-        return studentService.getQuestions(id);
+    @GetMapping("/questions/{id_lesson}")
+    public List<QuestionDto> getQuestions(@PathVariable("id_lesson") long lessonId){
+        return studentService.getQuestions(lessonId);
     }
 
-    @PostMapping("/answers")
-    public AnswerDto saveAnswer(@RequestBody AnswerDto answerDto){
-        return studentService.saveAnswer(answerDto);
+    @PostMapping("/{login}/answers")
+    public AnswerDto saveAnswer(@PathVariable("login") String login, @RequestBody AnswerDto answerDto){
+        return studentService.saveAnswer(login, answerDto);
     }
 
     @GetMapping("/lessons")

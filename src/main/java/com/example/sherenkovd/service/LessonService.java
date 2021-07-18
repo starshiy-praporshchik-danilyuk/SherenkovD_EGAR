@@ -3,6 +3,7 @@ package com.example.sherenkovd.service;
 import com.example.sherenkovd.converters.LessonConverter;
 import com.example.sherenkovd.dto.LessonDto;
 import com.example.sherenkovd.models.Lesson;
+import com.example.sherenkovd.models.User;
 import com.example.sherenkovd.repositories.LessonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class LessonService {
     @Autowired
     private LessonConverter lessonConverter;
 
-    public List<LessonDto> getLessons(){
-        List<Lesson> lessons = lessonRepo.findAll();
+    public List<LessonDto> getLessonsForTeacher(User teacher){
+        List<Lesson> lessons = lessonRepo.findLessonsByTeacherEquals(teacher);
         List<LessonDto> lessonsDto = new ArrayList<>();
         for (Lesson lesson : lessons)
             lessonsDto.add(lessonConverter.fromLessonToLessonDto(lesson));
@@ -35,13 +36,18 @@ public class LessonService {
         return lessonsDto;
     }
 
-    public LessonDto getLesson(long id){
-        var lesson = lessonRepo.getById(id);
+    public LessonDto getLessonDto(long lessonId){
+        var lesson = lessonRepo.getById(lessonId);
         return lessonConverter.fromLessonToLessonDto(lesson);
     }
 
-    public LessonDto addLesson(LessonDto lessonDto){
-        var lesson = lessonRepo.save(lessonConverter.fromLessonDtoToLesson(lessonDto));
+    public Lesson getLesson(long id){
+        return lessonRepo.getById(id);
+    }
+
+    public LessonDto addLesson(User teacher, LessonDto lessonDto){
+        var lesson = lessonRepo.save(new Lesson(teacher, lessonDto.getTheme(), lessonDto.getLesDate(),
+                                                        lessonDto.getFile(), false));
         return lessonConverter.fromLessonToLessonDto(lesson);
     }
 
