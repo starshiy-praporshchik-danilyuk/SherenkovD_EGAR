@@ -26,4 +26,16 @@ public class MainController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/lesson")
+    public String viewLecture(){
+        return "lecture_teacher";
+    }
+
+    @GetMapping("/view_student")
+    public String viewStudent(){
+        return "students";
+    }
+
+
 }

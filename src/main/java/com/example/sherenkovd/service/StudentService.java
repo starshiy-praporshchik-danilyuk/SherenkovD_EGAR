@@ -1,7 +1,7 @@
 package com.example.sherenkovd.service;
 
 import com.example.sherenkovd.dto.AnswerDto;
-import com.example.sherenkovd.dto.LessonDto;
+import com.example.sherenkovd.dto.LessonDtoSend;
 import com.example.sherenkovd.dto.QuestionDto;
 import com.example.sherenkovd.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class StudentService {
     @Autowired
     private UserService userService;
 
-    public List<LessonDto> getLessonsForStudent(){
+    public List<LessonDtoSend> getLessonsForStudent(){
         return lessonService.getFinishedLessons();
     }
 
@@ -39,7 +39,7 @@ public class StudentService {
         return questionService.getQuestions(lesson);
     }
 
-    public LessonDto getLesson(long lessonId){
+    public LessonDtoSend getLesson(long lessonId){
         return lessonService.getLessonDto(lessonId);
     }
 

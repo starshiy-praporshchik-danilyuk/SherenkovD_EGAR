@@ -6,6 +6,8 @@ import com.example.sherenkovd.models.Role;
 import com.example.sherenkovd.models.User;
 import com.example.sherenkovd.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,5 +37,11 @@ public class UserService {
 
     public User getUser(String login){
         return userRepo.findByLogin(login);
+    }
+
+    public User getThisUser(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String loginUser = ((UserDetails)principal).getUsername();
+        return userRepo.findByLogin(loginUser);
     }
 }

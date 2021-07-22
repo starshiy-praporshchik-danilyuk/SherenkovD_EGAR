@@ -1,9 +1,6 @@
 package com.example.sherenkovd.controllers;
 
-import com.example.sherenkovd.dto.AnswerDto;
-import com.example.sherenkovd.dto.LessonDto;
-import com.example.sherenkovd.dto.QuestionDto;
-import com.example.sherenkovd.dto.UserDto;
+import com.example.sherenkovd.dto.*;
 import com.example.sherenkovd.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +20,18 @@ public class TeacherRestController {
     }
 
     @GetMapping("/lessons/{id_lesson}")
-    public LessonDto getLesson(@PathVariable("id_lesson") long lessonId) {
+    public LessonDtoSend getLesson(@PathVariable("id_lesson") long lessonId) {
         return teacherService.getLesson(lessonId);
     }
 
-    @PostMapping("/{login}/lessons")
-    public LessonDto addLesson(@PathVariable("login") String login, @RequestBody LessonDto lessonDto) {
-        return teacherService.addLesson(login, lessonDto);
+    @PostMapping("/lessons")
+    public LessonDtoSend addLesson(@RequestBody LessonDtoRecv lessonDtoRecv) {
+        return teacherService.addLesson(lessonDtoRecv);
     }
 
-    @GetMapping("/{login}/lessons")
-    public List<LessonDto> getLessonsForTeacher(@PathVariable("login") String login) {
-        return teacherService.getLessonsForTeacher(login);
+    @GetMapping("/lessons")
+    public List<LessonDtoSend> getLessonsForTeacher() {
+        return teacherService.getLessonsForTeacher();
     }
 
     @PostMapping("/questions")

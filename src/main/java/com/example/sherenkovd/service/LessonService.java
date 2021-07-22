@@ -1,7 +1,8 @@
 package com.example.sherenkovd.service;
 
 import com.example.sherenkovd.converters.LessonConverter;
-import com.example.sherenkovd.dto.LessonDto;
+import com.example.sherenkovd.dto.LessonDtoSend;
+import com.example.sherenkovd.dto.LessonDtoRecv;
 import com.example.sherenkovd.models.Lesson;
 import com.example.sherenkovd.models.User;
 import com.example.sherenkovd.repositories.LessonRepo;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,23 +22,23 @@ public class LessonService {
     @Autowired
     private LessonConverter lessonConverter;
 
-    public List<LessonDto> getLessonsForTeacher(User teacher){
+    public List<LessonDtoSend> getLessonsForTeacher(User teacher){
         List<Lesson> lessons = lessonRepo.findLessonsByTeacherEquals(teacher);
-        List<LessonDto> lessonsDto = new ArrayList<>();
+        List<LessonDtoSend> lessonsDto = new ArrayList<>();
         for (Lesson lesson : lessons)
             lessonsDto.add(lessonConverter.fromLessonToLessonDto(lesson));
         return lessonsDto;
     }
 
-    public List<LessonDto> getFinishedLessons(){
+    public List<LessonDtoSend> getFinishedLessons(){
         List<Lesson> lessons = lessonRepo.findLessonsByFinishEquals(true);
-        List<LessonDto> lessonsDto = new ArrayList<>();
+        List<LessonDtoSend> lessonsDto = new ArrayList<>();
         for (Lesson lesson : lessons)
             lessonsDto.add(lessonConverter.fromLessonToLessonDto(lesson));
         return lessonsDto;
     }
 
-    public LessonDto getLessonDto(long lessonId){
+    public LessonDtoSend getLessonDto(long lessonId){
         var lesson = lessonRepo.getById(lessonId);
         return lessonConverter.fromLessonToLessonDto(lesson);
     }
@@ -45,9 +47,9 @@ public class LessonService {
         return lessonRepo.getById(id);
     }
 
-    public LessonDto addLesson(User teacher, LessonDto lessonDto){
-        var lesson = lessonRepo.save(new Lesson(teacher, lessonDto.getTheme(), lessonDto.getLesDate(),
-                                                        lessonDto.getFile(), false));
+    public LessonDtoSend addLesson(User teacher, LessonDtoRecv lessonDtoRecv){
+        var lesson = lessonRepo.save(new Lesson(teacher, lessonDtoRecv.getTheme(), new Date(),
+                lessonDtoRecv.getLink(), false));
         return lessonConverter.fromLessonToLessonDto(lesson);
     }
 

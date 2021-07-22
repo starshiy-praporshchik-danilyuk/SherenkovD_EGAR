@@ -19,9 +19,12 @@ public class MainService {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String loginUser = ((UserDetails)principal).getUsername();
         if(userRepo.findByLogin(loginUser).getRole().equals(Collections.singleton(Role.STUDENT)))
-            return "redirect:/student/lectures";
+            /*return "redirect:/student/lectures";*/
+            return "index";
         if(userRepo.findByLogin(loginUser).getRole().equals(Collections.singleton(Role.TEACHER)))
-            return "redirect:/teacher/lectures";
-        return "success";
+            /*return "redirect:/teacher/lectures";*/
+            return "main_teacher";
+        /*return "success";*/
+        return "index";
     }
 }

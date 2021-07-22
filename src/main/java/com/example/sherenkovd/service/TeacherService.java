@@ -1,12 +1,10 @@
 package com.example.sherenkovd.service;
 
-import com.example.sherenkovd.dto.AnswerDto;
-import com.example.sherenkovd.dto.LessonDto;
-import com.example.sherenkovd.dto.QuestionDto;
-import com.example.sherenkovd.dto.UserDto;
+import com.example.sherenkovd.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,23 +22,28 @@ public class TeacherService {
     @Autowired
     private AnswerService answerService;
 
-    public List<LessonDto> getLessonsForTeacher(String login){
-        var teacher = userService.getUser(login);
+    public List<LessonDtoSend> getLessonsForTeacher(){
+        var teacher = userService.getThisUser();
         return lessonService.getLessonsForTeacher(teacher);
     }
 
-    public LessonDto getLesson(long id){
-        return lessonService.getLessonDto(id);
+    public LessonDtoSend getLesson(long id){
+        var lesson = lessonService.getLesson(id);
+        if (lesson.getTeacher().equals(userService.getThisUser()))
+            return lessonService.getLessonDto(id);
+        return new LessonDtoSend();
     }
 
-    public LessonDto addLesson(String login, LessonDto lessonDto){
-        var teacher = userService.getUser(login);
-        return lessonService.addLesson(teacher, lessonDto);
+    public LessonDtoSend addLesson(LessonDtoRecv lessonDtoRecv){
+        var teacher = userService.getThisUser();
+        return lessonService.addLesson(teacher, lessonDtoRecv);
     }
 
     public List<QuestionDto> getQuestions(long lessonId){
         var lesson = lessonService.getLesson(lessonId);
-        return questionService.getQuestions(lesson);
+        if (lesson.getTeacher().equals(userService.getThisUser()))
+            return questionService.getQuestions(lesson);
+        return new ArrayList<>();
     }
 
     public QuestionDto addQuestion(QuestionDto questionDto){

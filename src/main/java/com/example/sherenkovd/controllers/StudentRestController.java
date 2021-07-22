@@ -1,7 +1,7 @@
 package com.example.sherenkovd.controllers;
 
 import com.example.sherenkovd.dto.AnswerDto;
-import com.example.sherenkovd.dto.LessonDto;
+import com.example.sherenkovd.dto.LessonDtoSend;
 import com.example.sherenkovd.dto.QuestionDto;
 import com.example.sherenkovd.dto.UserDto;
 import com.example.sherenkovd.service.StudentService;
@@ -18,7 +18,7 @@ public class StudentRestController {
     private StudentService studentService;
 
     @GetMapping("/lessons/{id_lesson}")
-    public LessonDto getLesson(@PathVariable("id_lesson") long lessonId){
+    public LessonDtoSend getLesson(@PathVariable("id_lesson") long lessonId){
         return studentService.getLesson(lessonId);
     }
 
@@ -33,7 +33,7 @@ public class StudentRestController {
     }
 
     @GetMapping("/lessons")
-    public List<LessonDto> getLecturesForStudent(){
+    public List<LessonDtoSend> getLecturesForStudent(){
         return studentService.getLessonsForStudent();
     }
 

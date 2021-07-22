@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
-      xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Лекции</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
     <style>
         .button-login {
             background-color: #6ea9b5;
@@ -59,7 +60,12 @@
     </style>
 </head>
 <body>
-    <div align="center" th:object="${lecture}">
+<div>
+<h1 class="text-header">Лекция</h1>
+    <div id="app"></div>
+</div>
+<script src="/js/lesson_and_questions.js"></script>
+    <!--   <div align="center" th:object="${lecture}">
         <h1 class="text-header">Лекция</h1>
         <h2 class="text-header" th:text="${lecture.theme}"></h2>
         <a th:href="${lecture.file}"><label class="text">Посмотреть</label></a>
@@ -97,7 +103,7 @@
         xmlhttp.open("GET", "http://localhost:8081/teacher/lecture/{id}", true);
         xmlhttp.send();
     }
-</script>
+</script>-->
 
 
 </body>
