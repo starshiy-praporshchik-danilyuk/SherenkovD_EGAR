@@ -27,9 +27,9 @@ public class StudentRestController {
         return studentService.getQuestions(lessonId);
     }
 
-    @PostMapping("/{login}/answers")
-    public AnswerDto saveAnswer(@PathVariable("login") String login, @RequestBody AnswerDto answerDto){
-        return studentService.saveAnswer(login, answerDto);
+    @PostMapping("/answers")
+    public AnswerDto saveAnswer(@RequestBody AnswerDto answerDto){
+        return studentService.saveAnswer(answerDto);
     }
 
     @GetMapping("/lessons")

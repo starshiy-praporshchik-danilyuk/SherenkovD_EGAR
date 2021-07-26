@@ -4,7 +4,10 @@ Vue.component('student-row', {
     props: ['student'],
     template: '<tr><td>{{ student.login }}</td>'+
         '<td>{{ student.name }}</td>' +
-        '<td>{{ student.surname }}</td></tr>'
+        '<td>{{ student.surname }}</td>' +
+        '<td><form method="get" action="/answers"  align="center">' +
+        '       <button type="submit" >Ответы</button>' +
+        '    </form></td></tr>'
 });
 
 Vue.component('students-list', {
@@ -20,8 +23,8 @@ Vue.component('students-list', {
     }
 });
 
-var app = new Vue({
-    el: '#app',
+var tableStudents = new Vue({
+    el: '#table-students',
     template: '<students-list :students="students" />',
     data: {
         students: []

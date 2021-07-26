@@ -20,11 +20,11 @@ public class MainService {
         String loginUser = ((UserDetails)principal).getUsername();
         if(userRepo.findByLogin(loginUser).getRole().equals(Collections.singleton(Role.STUDENT)))
             /*return "redirect:/student/lectures";*/
-            return "index";
+            return "lessons_student";
         if(userRepo.findByLogin(loginUser).getRole().equals(Collections.singleton(Role.TEACHER)))
             /*return "redirect:/teacher/lectures";*/
-            return "main_teacher";
+            return "lessons_teacher";
         /*return "success";*/
-        return "index";
+        return "login";
     }
 }

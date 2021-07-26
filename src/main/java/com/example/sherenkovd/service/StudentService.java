@@ -28,8 +28,8 @@ public class StudentService {
         return lessonService.getFinishedLessons();
     }
 
-    public AnswerDto saveAnswer(String login, AnswerDto answerDto){
-        var student = userService.getUser(login);
+    public AnswerDto saveAnswer(AnswerDto answerDto){
+        var student = userService.getThisUser();
         var question = questionService.getQuestion(answerDto.getQuestion());
         return answerService.saveAnswer(answerDto, student, question);
     }

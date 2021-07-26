@@ -29,13 +29,22 @@ public class MainController {
 
     @GetMapping("/lesson")
     public String viewLecture(){
-        return "lecture_teacher";
+        return "questions_teacher";
     }
 
     @GetMapping("/view_student")
     public String viewStudent(){
-        return "students";
+        return "students_teacher";
     }
 
+    @GetMapping("/answers")
+    public String viewAnswers(){
+        return "answers_teacher";
+    }
+
+    @GetMapping("/test")
+    public String viewTest(){
+        return "test_student";
+    }
 
 }
