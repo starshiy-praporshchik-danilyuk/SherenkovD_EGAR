@@ -27,15 +27,11 @@ Vue.component('question-form', {
     }
 });
 
-Vue.component('question-row', {
-    props: ['question'],
-    template: '<tr><td>{{ question.phrasing }}</td></tr>'
-});
-
 Vue.component('questions-list', {
     props: ['questions'],
-    template: '<div><table><tr><td>Вопросы</td></tr>' +
-        '<question-row v-for="question in questions" :question="question" /></table>' +
+    template: '<div><h1>Вопросы</h1>' +
+        /*'<question-row v-for="question in questions" :question="question" /></table>' +*/
+        '<li v-for="question in questions">{{question.phrasing}}</li>' +
         '<question-form :questions="questions" /></div>',
     created: function (){
         this.$http.get('/teacher/questions/' + 1).then(result =>
