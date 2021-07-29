@@ -9,6 +9,7 @@ import com.example.sherenkovd.repositories.LessonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,8 +49,8 @@ public class LessonService {
     }
 
     public LessonDtoSend addLesson(User teacher, LessonDtoRecv lessonDtoRecv){
-        var lesson = lessonRepo.save(new Lesson(teacher, lessonDtoRecv.getTheme(), new Date(),
-                lessonDtoRecv.getLink(), false));
+        var lesson = lessonRepo.save(new Lesson(teacher, lessonDtoRecv.getTheme(), LocalDate.parse("2020-01-08"),
+                lessonDtoRecv.getLink(), (short)0));
         return lessonConverter.fromLessonToLessonDto(lesson);
     }
 

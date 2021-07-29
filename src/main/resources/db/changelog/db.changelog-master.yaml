@@ -5,7 +5,7 @@ databaseChangeLog:
       author: SherenkovD
       changes:
         - createTable:
-            tableName: Users
+            tableName: users
             columns:
               - column:
                   name: login
@@ -31,7 +31,7 @@ databaseChangeLog:
 
 
         - createTable:
-            tableName: Lessons
+            tableName: lessons
             columns:
               - column:
                   name: id
@@ -64,14 +64,14 @@ databaseChangeLog:
                   name: finish
                   type: tinyint(1)
               - addForeignKeyConstraint:
-                  baseTableName: Lessons
+                  baseTableName: lessons
                   baseColumnNames: teacher
-                  referencedTableName: Users
+                  referencedTableName: users
                   referencedColumnNames: id
                   constraintName: lessons_users_fk
 
         - createTable:
-            tableName: Questions
+            tableName: question
             columns:
               - column:
                   name: id
@@ -91,15 +91,15 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - addForeignKeyConstraint:
-                  baseTableName: Questions
+                  baseTableName: questions
                   baseColumnNames: lesson
-                  referencedTableName: Lessons
+                  referencedTableName: lessons
                   referencedColumnNames: id
                   constraintName: questions_lessons_fk
 
 
         - createTable:
-            tableName: Answers
+            tableName: answers
             columns:
               - column:
                   name: id
@@ -129,21 +129,21 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - addForeignKeyConstraint:
-                  baseTableName: Answers
+                  baseTableName: answers
                   baseColumnNames: question
-                  referencedTableName: Questions
+                  referencedTableName: questions
                   referencedColumnNames: id
                   constraintName: answers_questions_fk
               - addForeignKeyConstraint:
-                  baseTableName: Answers
+                  baseTableName: answers
                   baseColumnNames: user
-                  referencedTableName: Users
+                  referencedTableName: users
                   referencedColumnNames: login
                   constraintName: answers_users_fk
 
 
         - createTable:
-            tableName: Role
+            tableName: role
             columns:
               - column:
                   name: user
@@ -157,8 +157,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - addForeignKeyConstraint:
-                  baseTableName: Role
+                  baseTableName: role
                   baseColumnNames: user
-                  referencedTableName: Users
+                  referencedTableName: users
                   referencedColumnNames: login
                   constraintName: role_users_fk

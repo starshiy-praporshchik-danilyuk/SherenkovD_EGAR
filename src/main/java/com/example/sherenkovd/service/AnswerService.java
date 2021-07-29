@@ -9,6 +9,7 @@ import com.example.sherenkovd.repositories.AnswerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class AnswerService {
     private AnswerConverter answerConverter;
 
     public AnswerDto saveAnswer(AnswerDto answerDto, User user, Question question){
-        var answer = answerRepo.save(new Answer(question, user, answerDto.getAnsDate(), answerDto.getPhrasing()));
+        var answer = answerRepo.save(new Answer(question, user, 
+        		answerDto.getAnsDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+        		answerDto.getPhrasing()));
         return answerConverter.fromAnswerToAnswerDto(answer);
     }
 

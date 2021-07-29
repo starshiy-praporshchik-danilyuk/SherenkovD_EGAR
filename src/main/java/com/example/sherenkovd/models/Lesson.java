@@ -4,10 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "Lessons")
+@Table(name = "lessons")
 @Data
 public class Lesson implements Serializable {
 
@@ -16,24 +17,25 @@ public class Lesson implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "teacher")
+    @JoinColumn(name = "teacher_id")
     private User teacher;
 
     @Column(length = 100)
     private String theme;
 
     @Column(name = "les_date")
-    private Date lesDate;
+    private LocalDate lesDate;
 
     @Column(length = 255)
     private String file;
 
-    private boolean finish;
+    @Column(name="finish")
+    private short finish;
 
     public Lesson() {
     }
 
-    public Lesson(User teacher, String theme, Date lesDate, String file, boolean finish) {
+    public Lesson(User teacher, String theme, LocalDate lesDate, String file, short finish) {
         this.teacher = teacher;
         this.theme = theme;
         this.lesDate = lesDate;

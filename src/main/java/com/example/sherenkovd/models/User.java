@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 public class User implements Serializable {
 
@@ -24,10 +24,16 @@ public class User implements Serializable {
     @Column(length = 20)
     private String password;
 
+    //TODO: OneToOne
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "user"))
+    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "role_idr"))
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
+    
+    //TODO: сделать правильную развязку
+    @ManyToOne
+    @JoinColumn("role_id")
+    Role role;
 
     public User() {
     }
