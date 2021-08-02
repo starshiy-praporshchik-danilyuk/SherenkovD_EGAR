@@ -22,8 +22,8 @@ public class UserService {
     @Autowired
     private UserConverter userConverter;
 
-    public List<UserDto> getStudents(){
-        List<User> users = userRepo.findUsersByRoleEquals(Role.STUDENT);
+    public List<UserDto> getUsersDtoByRole(Role role){
+        List<User> users = userRepo.findUsersByRoleEquals(role);
         List<UserDto> usersDto = new ArrayList<>();
         for (User user : users)
             usersDto.add(userConverter.fromUserToUserDto(user));

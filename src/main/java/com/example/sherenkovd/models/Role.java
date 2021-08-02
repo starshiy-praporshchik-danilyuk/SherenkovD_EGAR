@@ -1,20 +1,30 @@
 package com.example.sherenkovd.models;
 
+import lombok.Data;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
-import java.util.HashSet;
-import java.util.Set;
-//TODO: переделать на Entity
-public enum Role {
-    STUDENT, TEACHER;
+@Entity
+@Table(name = "roles")
+@Data
+public class Role implements Serializable {
 
-	//TOOD: перенести в сущность пользователя
-    public Set<SimpleGrantedAuthority> getAuthorities(){
-        Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
-        String name = this.name();
+    @Id
+    @Column(name = "id")
+    private int id;
 
-        authorities.add(new SimpleGrantedAuthority(name));
-        return authorities;
+    @Column(length = 20, name = "role_name")
+    private String roleName;
+
+
+    public Role() {}
+
+    public Role(int id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
     }
 }

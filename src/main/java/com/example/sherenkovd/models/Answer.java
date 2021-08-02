@@ -7,17 +7,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-//TODO: названия таблиц переименовать в нижний регистр
 @Table(name = "answers")
 @Data
 public class Answer implements Serializable {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    //TODO: ref-columns должны называться as question_id
-    @JoinColumn(name = "question")
+    @JoinColumn(name = "question_id")
     private Question question;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -27,7 +26,7 @@ public class Answer implements Serializable {
     @Column(name = "ans_date")
     private LocalDate ansDate;
 
-    @Column(length = 255)
+    @Column(name = "phrasing")
     private String phrasing;
 
     public Answer() {

@@ -1,11 +1,9 @@
 package com.example.sherenkovd.models;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -13,32 +11,26 @@ import java.util.Set;
 public class User implements Serializable {
 
     @Id
+    @Column(length = 20, name = "login")
     private String login;
 
-    @Column(length = 20)
+    @Column(length = 20, name = "name")
     private String name;
 
-    @Column(length = 20)
+    @Column(length = 20, name = "surname")
     private String surname;
 
-    @Column(length = 20)
+    @Column(length = 20, name = "password")
     private String password;
 
-    //TODO: OneToOne
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "role_idr"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> role;
-    
-    //TODO: сделать правильную развязку
-    @ManyToOne
-    @JoinColumn("role_id")
-    Role role;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User() {
     }
 
-    public User(String login, String name, String surname, String password, Set<Role> role) {
+    public User(String login, String name, String surname, String password, Role role) {
         this.login = login;
         this.name = name;
         this.surname = surname;

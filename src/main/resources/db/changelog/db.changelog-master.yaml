@@ -28,6 +28,15 @@ databaseChangeLog:
                   type: varchar(20)
                   constraints:
                     nullable: false
+              - column:
+                  name: role_id
+                  type: int
+              - addForeignKeyConstraint:
+                  baseTableName: users
+                  baseColumnNames: role_id
+                  referencedTableName: roles
+                  referencedColumnNames: id
+                  constraintName: users_roles_fk
 
 
         - createTable:
@@ -35,13 +44,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: teacher
+                  name: teacher_id
                   type: varchar(20)
                   constraints:
                     nullable: false
@@ -62,27 +71,27 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: finish
-                  type: tinyint(1)
+                  type: smallint
               - addForeignKeyConstraint:
                   baseTableName: lessons
-                  baseColumnNames: teacher
+                  baseColumnNames: teacher_id
                   referencedTableName: users
                   referencedColumnNames: id
                   constraintName: lessons_users_fk
 
         - createTable:
-            tableName: question
+            tableName: questions
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: lesson
-                  type: BIGINT
+                  name: lesson_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -92,7 +101,7 @@ databaseChangeLog:
                     nullable: false
               - addForeignKeyConstraint:
                   baseTableName: questions
-                  baseColumnNames: lesson
+                  baseColumnNames: lesson_id
                   referencedTableName: lessons
                   referencedColumnNames: id
                   constraintName: questions_lessons_fk
@@ -103,18 +112,18 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: question
-                  type: BIGINT
+                  name: question_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: user
+                  name: user_id
                   type: varchar(20)
                   constraints:
                     nullable: false
@@ -130,35 +139,48 @@ databaseChangeLog:
                     nullable: false
               - addForeignKeyConstraint:
                   baseTableName: answers
-                  baseColumnNames: question
+                  baseColumnNames: question_id
                   referencedTableName: questions
                   referencedColumnNames: id
                   constraintName: answers_questions_fk
               - addForeignKeyConstraint:
                   baseTableName: answers
-                  baseColumnNames: user
+                  baseColumnNames: user_id
                   referencedTableName: users
                   referencedColumnNames: login
                   constraintName: answers_users_fk
 
 
         - createTable:
-            tableName: role
+            tableName: roles
             columns:
               - column:
-                  name: user
-                  type: varchar(20)
+                  name: id
+                  type: int
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: role
+                  name: role_name
                   type: varchar(10)
                   constraints:
                     nullable: false
-              - addForeignKeyConstraint:
-                  baseTableName: role
-                  baseColumnNames: user
-                  referencedTableName: users
-                  referencedColumnNames: login
-                  constraintName: role_users_fk
+
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  - name: id
+                  - value: "1"
+              - column:
+                  - name: role_name
+                  - value: "TEACHER"
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  - name: id
+                  - value: "2"
+              - column:
+                  - name: role_name
+                  - value: "STUDENT"

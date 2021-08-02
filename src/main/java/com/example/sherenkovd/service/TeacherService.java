@@ -1,6 +1,7 @@
 package com.example.sherenkovd.service;
 
 import com.example.sherenkovd.dto.*;
+import com.example.sherenkovd.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class TeacherService {
 
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private RoleService roleService;
 
     public List<LessonDtoSend> getLessonsForTeacher(){
         var teacher = userService.getThisUser();
@@ -52,7 +56,8 @@ public class TeacherService {
     }
 
     public List<UserDto> getStudents(){
-        return userService.getStudents();
+        Role role = roleService.getRole(2);
+        return userService.getUsersDtoByRole(role);
     }
 
     public List<AnswerDto> getAnswers(String login, long idLesson){

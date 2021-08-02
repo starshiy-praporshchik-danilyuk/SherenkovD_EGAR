@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "lessons")
@@ -13,6 +12,7 @@ import java.util.Date;
 public class Lesson implements Serializable {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -20,13 +20,13 @@ public class Lesson implements Serializable {
     @JoinColumn(name = "teacher_id")
     private User teacher;
 
-    @Column(length = 100)
+    @Column(length = 100, name = "theme")
     private String theme;
 
     @Column(name = "les_date")
     private LocalDate lesDate;
 
-    @Column(length = 255)
+    @Column(name = "file")
     private String file;
 
     @Column(name="finish")

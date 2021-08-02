@@ -2,18 +2,18 @@ package com.example.sherenkovd.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class AnswerDto {
 
     private long question;
-    private Date ansDate;
+    private LocalDate ansDate;
     private String phrasing;
 
     public AnswerDto(long question, String phrasing){
         this.question = question;
         this.phrasing = phrasing;
-        this.ansDate = new Date();
+        this.ansDate = LocalDate.now();
     }
 }

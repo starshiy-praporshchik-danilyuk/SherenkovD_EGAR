@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface LessonRepo extends JpaRepository <Lesson, Long> {
-    List<Lesson> findLessonsByFinishEquals(boolean finish);
+    List<Lesson> findLessonsByFinishEquals(short finish);
     List<Lesson> findLessonsByTeacherEquals(User user);
 }

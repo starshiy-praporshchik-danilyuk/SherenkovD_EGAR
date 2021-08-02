@@ -32,7 +32,7 @@ public class LessonService {
     }
 
     public List<LessonDtoSend> getFinishedLessons(){
-        List<Lesson> lessons = lessonRepo.findLessonsByFinishEquals(true);
+        List<Lesson> lessons = lessonRepo.findLessonsByFinishEquals((short)1);
         List<LessonDtoSend> lessonsDto = new ArrayList<>();
         for (Lesson lesson : lessons)
             lessonsDto.add(lessonConverter.fromLessonToLessonDto(lesson));
@@ -49,7 +49,7 @@ public class LessonService {
     }
 
     public LessonDtoSend addLesson(User teacher, LessonDtoRecv lessonDtoRecv){
-        var lesson = lessonRepo.save(new Lesson(teacher, lessonDtoRecv.getTheme(), LocalDate.parse("2020-01-08"),
+        var lesson = lessonRepo.save(new Lesson(teacher, lessonDtoRecv.getTheme(), LocalDate.now(),
                 lessonDtoRecv.getLink(), (short)0));
         return lessonConverter.fromLessonToLessonDto(lesson);
     }

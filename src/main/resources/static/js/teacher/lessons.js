@@ -28,21 +28,29 @@ Vue.component('lesson-form', {
 
 Vue.component('lesson-row',{
     props: ['lesson'],
-    template: '<tr><td>{{ lesson.id }}</td>'+
-                  '<td>{{ lesson.theme }}</td>' +
+    template: '<tr><td>{{ lesson.theme }}</td>' +
                   '<td>{{ new Date(lesson.lesDate).toLocaleDateString() }}</td>' +
                   '<td>{{ lesson.file }}</td>' +
-                  '<td><form method="get" action="/lesson"  align="center">\n' +
-                  '    <button type="submit" >Вопросы</button>\n' +
-                  '</form></td></tr>'
+                  '<td><input type="button" @click="sendLessonId(lesson.id)" value="Открыть" /></td>' +
+                  '<questions-list :id_lesson="id_lesson" /></tr>',
+    data() {
+        return {
+            id_lesson: ''
+        }
+    },
+    methods: {
+        sendLessonId: function(id){
+            this.id_lesson = id;
+        }
+    }
+
 });
 
 Vue.component('lessons-list', {
     props: ['lessons'],
-    template: '<div><table><tr><td>ID</td><td>Тема</td><td>Дата</td><td>Ссылка</td><td>Вопросы</td></tr>' +
+    template: '<div><table><tr><td>Тема</td><td>Дата</td><td>Ссылка</td><td>Вопросы</td></tr>' +
         '<lesson-row v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" /></table>' +
-        '<lesson-form :lessons="lessons" />' +
-        '<questions-list :id_lesson="id_lesson"></div>',
+        '<lesson-form :lessons="lessons" /></div>',
     created: function (){
         lessonApi.get().then(result =>
             result.json().then(data =>
@@ -50,22 +58,17 @@ Vue.component('lessons-list', {
             )
         )
     },
-    data(){
-        return {
-            id_lesson: '1'
-        }
-    }
 });
 
 Vue.component('questions-list', {
     props: ['id_lesson'],
-    template: '<div>Вопросы к занятию {{id_lesson}}</div>',
-    created: function (){
-        this.$http.get('/teacher/questions/' + this.id_lesson).then(result =>
-            console.log(result)
-        )
-    },
-
+    template: '<div></div>',
+    watch: {
+        id_lesson: function (){
+            this.$http.get('/teacher/questions/' + this.id_lesson).then(result =>
+                console.log(result))
+        }
+    }
 });
 
 var tableLessons = new Vue({
