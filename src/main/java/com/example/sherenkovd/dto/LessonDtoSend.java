@@ -1,10 +1,12 @@
 package com.example.sherenkovd.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
 public class LessonDtoSend {
 
     private long id;
@@ -17,8 +19,5 @@ public class LessonDtoSend {
         this.theme = theme;
         this.lesDate = lesDate;
         this.file = file;
-    }
-
-    public LessonDtoSend() {
     }
 }

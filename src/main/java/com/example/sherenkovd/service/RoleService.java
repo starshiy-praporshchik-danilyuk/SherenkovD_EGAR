@@ -11,7 +11,7 @@ public class RoleService {
     @Autowired
     private RoleRepo roleRepo;
 
-    public Role getRole(int id){
-        return roleRepo.getById(id);
+    public Role getRole(String roleName){
+        return roleRepo.findRoleByRoleNameEquals(roleName);
     }
 }

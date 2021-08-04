@@ -1,6 +1,7 @@
 package com.example.sherenkovd.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Id
@@ -26,9 +28,6 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id")
     private Role role;
-
-    public User() {
-    }
 
     public User(String login, String name, String surname, String password, Role role) {
         this.login = login;

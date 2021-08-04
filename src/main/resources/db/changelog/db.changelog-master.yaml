@@ -30,7 +30,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: role_id
-                  type: int
+                  type: bigint
               - addForeignKeyConstraint:
                   baseTableName: users
                   baseColumnNames: role_id
@@ -156,7 +156,8 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -170,17 +171,11 @@ databaseChangeLog:
             tableName: roles
             columns:
               - column:
-                  - name: id
-                  - value: "1"
-              - column:
                   - name: role_name
                   - value: "TEACHER"
         - insert:
             tableName: roles
             columns:
-              - column:
-                  - name: id
-                  - value: "2"
               - column:
                   - name: role_name
                   - value: "STUDENT"

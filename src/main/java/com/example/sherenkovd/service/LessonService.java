@@ -9,6 +9,7 @@ import com.example.sherenkovd.repositories.LessonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,8 +41,12 @@ public class LessonService {
     }
 
     public LessonDtoSend getLessonDto(long lessonId){
-        var lesson = lessonRepo.getById(lessonId);
-        return lessonConverter.fromLessonToLessonDto(lesson);
+        try{
+            var lesson = lessonRepo.getById(lessonId);
+            return lessonConverter.fromLessonToLessonDto(lesson);
+        } catch(Exception e){
+            return new LessonDtoSend();
+        }
     }
 
     public Lesson getLesson(long id){

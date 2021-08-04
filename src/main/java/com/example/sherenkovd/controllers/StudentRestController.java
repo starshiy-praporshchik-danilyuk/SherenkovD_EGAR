@@ -37,7 +37,7 @@ public class StudentRestController {
         return studentService.getLessonsForStudent();
     }
 
-    @GetMapping("/{login}")
+    @GetMapping("/students/{login}")
     public UserDto getStudent(@PathVariable("login") String login){
         return studentService.getStudent(login);
     }

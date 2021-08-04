@@ -1,6 +1,7 @@
 package com.example.sherenkovd.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "answers")
 @Data
+@NoArgsConstructor
 public class Answer implements Serializable {
     @Id
     @Column(name = "id")
@@ -28,9 +30,6 @@ public class Answer implements Serializable {
 
     @Column(name = "phrasing")
     private String phrasing;
-
-    public Answer() {
-    }
 
     public Answer(Question question, User user, LocalDate ansDate, String phrasing) {
         this.question = question;

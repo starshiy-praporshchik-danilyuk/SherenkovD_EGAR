@@ -2,8 +2,10 @@ package com.example.sherenkovd.dto;
 
 import com.example.sherenkovd.models.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserRegistrationDto {
 
     private String login;

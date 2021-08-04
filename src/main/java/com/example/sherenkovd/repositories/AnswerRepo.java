@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AnswerRepo extends JpaRepository <Answer, Long> {
 
-    @Query(value = "select * from Answers where user = ?1 and question in(select id from Questions where lesson = ?2)",
+    @Query(value = "select * from answers where user_id = ?1 and question_id in(select id from questions where lesson_id = ?2)",
             nativeQuery = true)
     List<Answer> getAnswersForStudent(String login, long lessonId);
 }

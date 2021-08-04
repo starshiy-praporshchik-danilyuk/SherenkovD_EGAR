@@ -29,9 +29,13 @@ public class StudentService {
     }
 
     public AnswerDto saveAnswer(AnswerDto answerDto){
-        var student = userService.getThisUser();
-        var question = questionService.getQuestion(answerDto.getQuestion());
-        return answerService.saveAnswer(answerDto, student, question);
+        try{
+            var student = userService.getThisUser();
+            var question = questionService.getQuestion(answerDto.getQuestion());
+            return answerService.saveAnswer(answerDto, student, question);
+        } catch(Exception e){
+            return new AnswerDto();
+        }
     }
 
     public List<QuestionDto> getQuestions(long lessonId){

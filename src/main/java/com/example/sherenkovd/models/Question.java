@@ -1,6 +1,7 @@
 package com.example.sherenkovd.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "questions")
 @Data
+@NoArgsConstructor
 public class Question implements Serializable {
 
     @Id
@@ -21,9 +23,6 @@ public class Question implements Serializable {
 
     @Column(name = "phrasing")
     private String phrasing;
-
-    public Question() {
-    }
 
     public Question(Lesson lesson, String phrasing) {
         this.lesson = lesson;

@@ -22,12 +22,11 @@ public class RegistrationService {
 
     public String addUser(UserRegistrationDto userRegistrationDto, Map<String, Object> model) {
         var userFromDb = userRepo.findByLogin(userRegistrationDto.getLogin());
-
         if (userFromDb != null) {
             model.put("message", "Пользователь c таким логином уже существует");
             return "registration";
         }
-        userRegistrationDto.setRole(roleService.getRole(2));
+        userRegistrationDto.setRole(roleService.getRole("STUDENT"));
         userRepo.save(userRegistrationConverter.fromUserRegistrationDtoToUser(userRegistrationDto));
 
         return "redirect:/login";

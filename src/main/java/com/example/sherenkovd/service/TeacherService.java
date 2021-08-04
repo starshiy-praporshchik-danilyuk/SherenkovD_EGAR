@@ -32,31 +32,47 @@ public class TeacherService {
     }
 
     public LessonDtoSend getLesson(long id){
-        var lesson = lessonService.getLesson(id);
-        if (lesson.getTeacher().equals(userService.getThisUser()))
-            return lessonService.getLessonDto(id);
-        return new LessonDtoSend();
+        try{
+            var lesson = lessonService.getLesson(id);
+            if (lesson.getTeacher().equals(userService.getThisUser()))
+                return lessonService.getLessonDto(id);
+            return new LessonDtoSend();
+        } catch (Exception e){
+            return new LessonDtoSend();
+        }
     }
 
     public LessonDtoSend addLesson(LessonDtoRecv lessonDtoRecv){
-        var teacher = userService.getThisUser();
-        return lessonService.addLesson(teacher, lessonDtoRecv);
+        try{
+            var teacher = userService.getThisUser();
+            return lessonService.addLesson(teacher, lessonDtoRecv);
+        } catch(Exception e){
+            return new LessonDtoSend();
+        }
     }
 
     public List<QuestionDto> getQuestions(long lessonId){
-        var lesson = lessonService.getLesson(lessonId);
-        if (lesson.getTeacher().equals(userService.getThisUser()))
-            return questionService.getQuestions(lesson);
-        return new ArrayList<>();
+        try{
+            var lesson = lessonService.getLesson(lessonId);
+            if (lesson.getTeacher().equals(userService.getThisUser()))
+                return questionService.getQuestions(lesson);
+            return new ArrayList<>();
+        } catch(Exception e){
+            return new ArrayList<>();
+        }
     }
 
     public QuestionDto addQuestion(QuestionDto questionDto){
-        var lesson = lessonService.getLesson(questionDto.getLesson());
-        return questionService.addQuestion(questionDto, lesson);
+        try{
+            var lesson = lessonService.getLesson(questionDto.getLesson());
+            return questionService.addQuestion(questionDto, lesson);
+        } catch(Exception e){
+            return new QuestionDto();
+        }
     }
 
     public List<UserDto> getStudents(){
-        Role role = roleService.getRole(2);
+        var role = roleService.getRole("STUDENT");
         return userService.getUsersDtoByRole(role);
     }
 
