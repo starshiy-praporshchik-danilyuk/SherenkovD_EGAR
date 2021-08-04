@@ -29,7 +29,6 @@ public class AnswerService {
     }
 
     public List<AnswerDto> getAnswers(String login, long lessonId){
-
         List<Answer> answers = answerRepo.getAnswersForStudent(login, lessonId);
         List<AnswerDto> answersDto = new ArrayList<>();
         for (Answer answer : answers){

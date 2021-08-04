@@ -4,7 +4,6 @@ import com.example.sherenkovd.dto.*;
 import com.example.sherenkovd.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -21,12 +20,20 @@ public class TeacherRestController {
 
     @GetMapping("/lessons/{id_lesson}")
     public LessonDtoSend getLesson(@PathVariable("id_lesson") long lessonId) {
-        return teacherService.getLesson(lessonId);
+        try {
+            return teacherService.getLesson(lessonId);
+        } catch (Exception e) {
+            return new LessonDtoSend();
+        }
     }
 
     @PostMapping("/lessons")
     public LessonDtoSend addLesson(@RequestBody LessonDtoRecv lessonDtoRecv) {
-        return teacherService.addLesson(lessonDtoRecv);
+        try {
+            return teacherService.addLesson(lessonDtoRecv);
+        } catch (Exception e){
+            return new LessonDtoSend();
+        }
     }
 
     @GetMapping("/lessons")
@@ -36,7 +43,11 @@ public class TeacherRestController {
 
     @PostMapping("/questions")
     public QuestionDto addQuestion(@RequestBody QuestionDto questionDto){
-        return teacherService.addQuestion(questionDto);
+        try{
+            return teacherService.addQuestion(questionDto);
+        } catch (Exception e){
+            return new QuestionDto();
+        }
     }
 
     @GetMapping("/students")

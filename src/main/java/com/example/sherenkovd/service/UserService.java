@@ -6,8 +6,7 @@ import com.example.sherenkovd.models.Role;
 import com.example.sherenkovd.models.User;
 import com.example.sherenkovd.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ public class UserService {
     public UserDto getUserDto(String login){
         var user = userRepo.findByLogin(login);
         return userConverter.fromUserToUserDto(user);
+
     }
 
     public User getUser(String login){
@@ -40,8 +40,8 @@ public class UserService {
     }
 
     public User getThisUser(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String loginUser = ((UserDetails)principal).getUsername();
-        return userRepo.findByLogin(loginUser);
+        /*Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String loginUser = ((UserDetails)principal).getUsername();*/
+        return userRepo.findByLogin(/*loginUser*/"user");
     }
 }
