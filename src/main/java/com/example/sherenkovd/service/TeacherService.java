@@ -1,7 +1,6 @@
 package com.example.sherenkovd.service;
 
 import com.example.sherenkovd.dto.*;
-import com.example.sherenkovd.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +55,7 @@ public class TeacherService {
     }
 
     public List<UserDto> getStudents(){
-        Role role = roleService.getRole(2);
+        var role = roleService.getRole("STUDENTS");
         return userService.getUsersDtoByRole(role);
     }
 

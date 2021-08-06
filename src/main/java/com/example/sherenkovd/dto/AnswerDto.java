@@ -18,6 +18,4 @@ public class AnswerDto {
         this.phrasing = phrasing;
         this.ansDate = LocalDate.now();
     }
-    public AnswerDto(){
-    }
 }

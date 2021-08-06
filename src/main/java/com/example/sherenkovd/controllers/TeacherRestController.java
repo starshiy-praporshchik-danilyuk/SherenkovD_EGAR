@@ -20,20 +20,12 @@ public class TeacherRestController {
 
     @GetMapping("/lessons/{id_lesson}")
     public LessonDtoSend getLesson(@PathVariable("id_lesson") long lessonId) {
-        try {
-            return teacherService.getLesson(lessonId);
-        } catch (Exception e) {
-            return new LessonDtoSend();
-        }
+        return teacherService.getLesson(lessonId);
     }
 
     @PostMapping("/lessons")
     public LessonDtoSend addLesson(@RequestBody LessonDtoRecv lessonDtoRecv) {
-        try {
-            return teacherService.addLesson(lessonDtoRecv);
-        } catch (Exception e){
-            return new LessonDtoSend();
-        }
+        return teacherService.addLesson(lessonDtoRecv);
     }
 
     @GetMapping("/lessons")
@@ -43,11 +35,7 @@ public class TeacherRestController {
 
     @PostMapping("/questions")
     public QuestionDto addQuestion(@RequestBody QuestionDto questionDto){
-        try{
-            return teacherService.addQuestion(questionDto);
-        } catch (Exception e){
-            return new QuestionDto();
-        }
+        return teacherService.addQuestion(questionDto);
     }
 
     @GetMapping("/students")

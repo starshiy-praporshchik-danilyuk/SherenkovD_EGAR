@@ -14,6 +14,4 @@ public class QuestionDto {
         this.lesson = lesson;
         this.phrasing = phrasing;
     }
-    public QuestionDto() {
-    }
 }
