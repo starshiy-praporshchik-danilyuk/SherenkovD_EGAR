@@ -19,7 +19,11 @@ public class StudentRestController {
 
     @GetMapping("/lessons/{id_lesson}")
     public LessonDtoSend getLesson(@PathVariable("id_lesson") long lessonId){
-        return studentService.getLesson(lessonId);
+        try{
+            return studentService.getLesson(lessonId);
+        } catch (Exception e){
+            return new LessonDtoSend();
+        }
     }
 
     @GetMapping("/questions/{id_lesson}")
@@ -29,7 +33,11 @@ public class StudentRestController {
 
     @PostMapping("/answers")
     public AnswerDto saveAnswer(@RequestBody AnswerDto answerDto){
-        return studentService.saveAnswer(answerDto);
+        try{
+            return studentService.saveAnswer(answerDto);
+        } catch (Exception e){
+            return new AnswerDto();
+        }
     }
 
     @GetMapping("/lessons")
@@ -39,6 +47,10 @@ public class StudentRestController {
 
     @GetMapping("/students/{login}")
     public UserDto getStudent(@PathVariable("login") String login){
-        return studentService.getStudent(login);
+        try{
+            return studentService.getStudent(login);
+        } catch (Exception e){
+            return new UserDto();
+        }
     }
 }

@@ -32,47 +32,31 @@ public class TeacherService {
     }
 
     public LessonDtoSend getLesson(long id){
-        try{
-            var lesson = lessonService.getLesson(id);
-            if (lesson.getTeacher().equals(userService.getThisUser()))
-                return lessonService.getLessonDto(id);
-            return new LessonDtoSend();
-        } catch (Exception e){
-            return new LessonDtoSend();
-        }
+        var lesson = lessonService.getLesson(id);
+        if (lesson.getTeacher().equals(userService.getThisUser()))
+            return lessonService.getLessonDto(id);
+        return new LessonDtoSend();
     }
 
     public LessonDtoSend addLesson(LessonDtoRecv lessonDtoRecv){
-        try{
-            var teacher = userService.getThisUser();
-            return lessonService.addLesson(teacher, lessonDtoRecv);
-        } catch(Exception e){
-            return new LessonDtoSend();
-        }
+        var teacher = userService.getThisUser();
+        return lessonService.addLesson(teacher, lessonDtoRecv);
     }
 
     public List<QuestionDto> getQuestions(long lessonId){
-        try{
-            var lesson = lessonService.getLesson(lessonId);
-            if (lesson.getTeacher().equals(userService.getThisUser()))
-                return questionService.getQuestions(lesson);
-            return new ArrayList<>();
-        } catch(Exception e){
-            return new ArrayList<>();
-        }
+        var lesson = lessonService.getLesson(lessonId);
+        if (lesson.getTeacher().equals(userService.getThisUser()))
+            return questionService.getQuestions(lesson);
+        return new ArrayList<>();
     }
 
     public QuestionDto addQuestion(QuestionDto questionDto){
-        try{
-            var lesson = lessonService.getLesson(questionDto.getLesson());
-            return questionService.addQuestion(questionDto, lesson);
-        } catch(Exception e){
-            return new QuestionDto();
-        }
+        var lesson = lessonService.getLesson(questionDto.getLesson());
+        return questionService.addQuestion(questionDto, lesson);
     }
 
     public List<UserDto> getStudents(){
-        var role = roleService.getRole("STUDENT");
+        Role role = roleService.getRole(2);
         return userService.getUsersDtoByRole(role);
     }
 

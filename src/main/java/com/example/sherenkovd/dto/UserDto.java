@@ -16,4 +16,6 @@ public class UserDto {
         this.name = name;
         this.surname = surname;
     }
+    public UserDto() {
+    }
 }
