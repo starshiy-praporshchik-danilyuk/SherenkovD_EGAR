@@ -17,10 +17,11 @@ public class MainController {
         return "redirect:/success";
     }
 
-    /*@GetMapping("/success")
+    @GetMapping("/success")
     public String success() {
-        return mainService.success();
-    }*/
+        /*return mainService.success();*/
+        return "lessons_teacher";
+    }
 
     @GetMapping("/login")
     public String login() {

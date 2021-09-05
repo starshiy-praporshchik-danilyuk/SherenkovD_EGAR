@@ -1,4 +1,4 @@
-var lessonApi = Vue.resource('/teacher/lessons');
+var lessonApi = Vue.resource('http://localhost:8081/teacher/lessons');
 
 Vue.component('lesson-form', {
     props: ['lessons'],

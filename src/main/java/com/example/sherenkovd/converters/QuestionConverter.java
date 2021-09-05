@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class QuestionConverter {
 
     public QuestionDto fromQuestionToQuestionDto(Question question){
-        return new QuestionDto(question.getLesson().getId(),
+        return new QuestionDto(question.getId(), question.getLesson().getId(),
                 question.getPhrasing());
     }
 }

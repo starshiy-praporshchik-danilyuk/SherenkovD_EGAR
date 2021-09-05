@@ -2,7 +2,7 @@ var questionsApi = Vue.resource('/teacher/questions');
 
 Vue.component('question-form', {
     props: ['questions'],
-    date: function (){
+    data: function (){
         return{
             /*lesson: '',*/
             phrasing: ''

@@ -55,7 +55,7 @@ public class TeacherService {
     }
 
     public List<UserDto> getStudents(){
-        var role = roleService.getRole("STUDENTS");
+        var role = roleService.getRole("STUDENT");
         return userService.getUsersDtoByRole(role);
     }
 
